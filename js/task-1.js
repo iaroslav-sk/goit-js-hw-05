@@ -1,25 +1,30 @@
-const account = {
-  owner: 'Mango',
-  balance: 24000,
-  discount: 0.1,
-  orders: ['order-1', 'order-2', 'order-3'],
-  changeDiscount(value) {
-    this.discount = value;
-  },
-  showOrders() {
-    return this.orders;
-  },
-  addOrder(cost, order) {
-    this.balance -= cost;
-    this.orders.push(order);
-  },
-};
+// Напиши функцию-конструктор Account, которая создает 
+// объект со свойствами login и email. 
+// В prototype функции-конструктора добавь метод getInfo(), 
+// который выводит в консоль значения полей login и email
+//  объекта который его вызвал.
 
-account.changeDiscount(0.15);
-console.log(account.discount); // 0.15
+const Account = function (login, email){
+  this.login = login;
+  this.email = email;
 
-console.table(account.showOrders()); // ['order-1', 'order-2', 'order-3']
+  this.getInfo = function () {
+    console.log(this.login, this.email)
+  }
+}
 
-account.addOrder(5000, 'order-4');
-console.log(account.balance); // 19000
-console.table(account.showOrders()); // ['order-1', 'order-2', 'order-3', 'order-4']
+console.log(Account.prototype.getInfo); // function
+
+const mango = new Account({
+  login: 'Mangozedog',
+  email: 'mango@dog.woof',
+});
+
+mango.getInfo(); // Login: Mangozedog, Email: mango@dog.woof
+
+const poly = new Account({
+  login: 'Poly',
+  email: 'poly@mail.com',
+});
+
+poly.getInfo(); // Login: Poly, Email: poly@mail.com
